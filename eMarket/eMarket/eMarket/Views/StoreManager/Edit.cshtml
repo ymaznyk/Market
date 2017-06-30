@@ -1,0 +1,67 @@
+﻿@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model eMarket.Models.Product
+    <h2>Edit @Model.Title</h2>
+@using (Html.BeginForm("Edit", "StoreManager", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.ValidationSummary(true)
+        @Html.HiddenFor(model => model.ProductId)
+        @Html.HiddenFor(model => model.Img)
+        <div class="form-group select-width">
+            @Html.LabelFor(model => model.CategoryId, "Category")
+            @Html.DropDownList("CategoryId", null, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.CategoryId)
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Title)
+            @Html.TextBoxFor(model => model.Title, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Title)
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Price)
+            @Html.TextBoxFor(model => model.Price, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Price)
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Item)
+            @Html.TextBoxFor(model => model.Item, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Item)
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Company)
+            @Html.TextBoxFor(model => model.Company, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Company)
+        </div>
+        <div class="form-group select-width">
+            @Html.LabelFor(model => model.Availability)
+            @Html.DropDownList("Availability", new SelectList(new string[] { "Available", "Not Available" }),
+           String.Empty, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Availability)
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Img)
+        </div>
+        <div class="form-group">
+            @if (Model.Img == null)
+            {
+                @:None
+            }
+            else
+            {
+                <img width="150" height="150" alt="@Model.Title" src="/Content/Images/@Model.Img" />
+            }
+        </div>
+        <div class="form-group">
+            <input  type="file" name="file" />
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Save Changes" />
+        </div>
+}
+<div>
+    @Html.ActionLink("Back", null, null, null, new { href = Request.UrlReferrer })
+    @ViewBag.Url
+</div>
+

@@ -1,0 +1,25 @@
+﻿@if (Request.IsAuthenticated)
+{
+    
+    <ul class="nav nav-pills nav-stacked">
+        <li class="first"><a href="/" id="current">Home</a></li>
+        @if (Request.IsAuthenticated && !User.IsInRole("admin"))
+        {
+            <li><a href="/ShoppingCart/">My Shopping cart</a></li>
+        }
+
+        
+        <li>@using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" })) {
+            @Html.AntiForgeryToken()
+            <a href="javascript:document.getElementById('logoutForm').submit()">Sign out</a>
+        }</li>
+        <li class="text-center" id="user-name">Hi, @User.Identity.Name!</li>
+    </ul>
+}
+else {
+    <ul class="nav nav-pills nav-stacked">
+        <li class="first"><a href="/" id="current">Home</a></li>
+        <li>@Html.ActionLink("Sign In", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+        <li>@Html.ActionLink("Create an account", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+    </ul>
+}

@@ -1,0 +1,96 @@
+﻿@model PagedList.IPagedList<eMarket.Models.Product>
+@using PagedList.Mvc;
+    @{
+        ViewBag.Title = "Browse";
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+<script>
+    document.getElementById("SortList").onload = function () {
+        var selectList = document.getElementById("SortList");
+        selectList.value(sortOrder);
+    }
+    function doSort() {
+        window.location.href = document.getElementById("SortList").value;
+    }
+    document.getElementById("PageList").onload = function () {
+        var selectList = document.getElementById("PageList");
+        selectList.value(pageSize);
+    }
+    function doPage() {
+        window.location.href = document.getElementById("PageList").value;
+    }
+</script>
+    @if (Request.IsAuthenticated && User.IsInRole("admin"))
+    {
+        <span class="button off-width">@Html.ActionLink("Add new item", "Create", "StoreManager")</span>
+    }
+    <h2>@ViewBag.Category</h2>
+    <div >
+        <span>Sort by</span>
+        <select class="form-control select-width filter" value="@ViewBag.Sort" id="SortList" onchange="doSort()">
+            <option style="display:none">@ViewBag.Sort</option>
+            <option value="@Url.Action("Browse", "Home",
+                      new { Category = ViewBag.Category, page = 1, sortOrder ="What's new", pageSize = ViewBag.PageSize })">
+                What's new
+            </option>
+            <option value="@Url.Action("Browse", "Home",
+                      new { Category = ViewBag.Category, page = 1, sortOrder ="Price: High to Low", pageSize = ViewBag.PageSize })">
+                Price: High to Low
+            </option>
+            <option value="@Url.Action("Browse", "Home",
+                      new { Category = ViewBag.Category, page = 1, sortOrder ="Price: Low to High", pageSize = ViewBag.PageSize })">
+                Price: Low to High
+            </option>
+        </select>
+        <span>Quantity</span>
+        <select class="form-control select-width filter" style="width: 70px" value="@ViewBag.PageSize" id="PageList" onchange="doPage()">
+            <option style="display:none">@ViewBag.PageSize</option>
+            <option value="@Url.Action("Browse", "Home",
+                      new { Category = ViewBag.Category, page = 1, pageSize = 5, sortOrder = ViewBag.Sort })">5</option>
+            <option value="@Url.Action("Browse", "Home",
+                      new { Category = ViewBag.Category, page = 1, pageSize = 10, sortOrder = ViewBag.Sort })">10</option>
+            <option value="@Url.Action("Browse", "Home",
+                      new { Category = ViewBag.Category, page = 1, pageSize = 15, sortOrder = ViewBag.Sort })">15</option>
+        </select>
+    </div>
+        @foreach (var product in Model)
+            {
+            <div class="item">
+                <a href="@Url.Action("Details", new { id = product.ProductId })">
+                    <img class="img-thumbnail" width="150" height="200" alt="@product.Title" src="/Content/Images/@product.Img" />
+                    <p class="title">@product.Title</p>
+                </a>
+                @if (Request.IsAuthenticated && User.IsInRole("admin"))
+                {
+                    <div>
+                        <span class="button button-center">
+                            @Html.ActionLink("Edit", "Edit", "StoreManager", new { id = product.ProductId }, "")
+                        </span>
+                        <span class="button button-center">
+                             @Html.ActionLink("Delete", "Delete", "StoreManager", new { id = product.ProductId }, "")
+                        </span>
+                    </div>
+                }
+                else
+                {
+                    <div>
+                        <span class="button button-center">
+                            @Html.ActionLink("Buy", "AddToCart", "ShoppingCart", new { id = product.ProductId }, "")
+                        </span>
+                        <span class="button button-center">
+                            @Html.ActionLink("View", "Details", new { id = product.ProductId })
+                        </span>
+                    </div>
+                }
+            </div>
+        }
+<span class="text-center">
+    @Html.PagedListPager(Model, page => Url.Action("Browse",
+                        new { Category = ViewBag.Category, page, sortOrder = ViewBag.Sort, pageSize = ViewBag.PageSize }), PagedListRenderOptions.OnlyShowFivePagesAtATime)
+</span>
+   
+
+
+
+
+

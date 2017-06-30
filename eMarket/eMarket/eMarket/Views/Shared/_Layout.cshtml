@@ -1,0 +1,32 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    
+    <div id="wrapper">
+        <div id="header">
+            <img src="/Content/Images/AppleGo.png" style="height: 140px;width: 20%" >
+            <div class="menu">
+                <section id="login"> @Html.Partial("_LoginPartial")</section>
+            </div>
+        </div>
+        <div class="content">
+            <div class="categories">
+                <h2>Categories:</h2>
+                @{Html.RenderAction("GenreMenu", "Home");}
+            </div>
+            <div class="post">
+                @RenderBody()
+            </div>
+        </div>
+    </div>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+    
+</body>
+</html>

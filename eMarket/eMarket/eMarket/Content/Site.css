@@ -1,0 +1,123 @@
+﻿*{
+    margin:0;
+    padding: 0;
+    outline: none;
+    box-sizing: border-box; 
+}
+#wrapper {
+    width:100%;
+    margin: 0 auto;
+    float: none;
+    background: #fff;
+}
+#header {
+    position: relative;
+    overflow:hidden; 
+    width:100%;
+    margin: auto;
+    background:#aaaaaa;
+    background:rgba(170, 170, 170, 0.85);
+}
+
+.logo{
+    float:left;
+    margin-left:50%;
+    width:6%;
+    height:6%;
+}
+.menu {
+    position:relative;
+    float: right;
+    width: 20%;
+    height: 140px;
+    display:block;
+    background: #aaaaaa;
+    background: rgba(170, 170, 170, 0.85);
+    text-align:center;
+    font-size: medium;
+}
+
+.categories {
+    position:relative;
+    overflow:hidden;
+    width:20%;
+    height: 500px;
+    float: left;
+    background: #aaaaaa;
+    background: rgba(170, 170, 170, 0.85);
+    text-align:center;
+    font-size: large;
+}
+
+.categories h2{ 
+    margin: 15px;
+}
+.post{
+    position:relative;
+    overflow:hidden;
+    width:80%;
+    padding:1%;
+    height: auto;
+    float: right;
+    display: block;
+    background: #fff;
+}
+.item{
+    position:relative;
+    overflow:hidden;
+    height: auto;
+    margin: 40px;
+    display:inline-block;
+    text-align:center;
+}
+.item li {
+    padding: 10px;
+    display:inline-block;
+}
+.button, input[type=submit]
+{
+	padding: 5px; 
+	border: 1px;
+	background: #5e5b54;
+	color: #fff;
+	font-weight: bold;
+    border-radius: 10px;
+}
+.button a
+{
+	color: #fff !important;
+}
+.title{
+
+    margin: auto;
+    width:50%;
+}
+.button-center{
+    width: 40%;
+    text-align:center;
+    display: inline-block;
+}
+a{
+    color:black;
+}
+a:hover{
+    color: #808080;
+}
+#logo{
+    padding:0;
+    border:none;
+    border-radius:0;
+}
+input[type=text], input[type=password], .select-width 
+{
+	width: 220px;
+}
+.field-validation-error {
+    color: #ff0000;
+}
+th{
+    text-align:center;
+}
+.filter{
+    display: inline-block;
+}

@@ -1,0 +1,44 @@
+﻿@model eMarket.Models.Product
+@{
+    ViewBag.Title = Model.Title;
+ }
+<div>
+    @Html.ActionLink("Back", null, null, null, new { href = Request.UrlReferrer })
+</div>
+<div id="product-details">
+    <h2>@Model.Title</h2>
+    <div class="col-md-3"> 
+        <img alt="@Model.Title" src="/Content/Images/@Model.Img"style="height: 250px;width: 250px" />
+    </div>
+    <div class="col-md-9">
+        <div class="list-group">
+            <div class="list-group-item-heading">
+                @Html.LabelFor(model => model.Category.Name):
+                @Model.Category.Name
+            </div>
+            <div class="list-group-item-heading">
+                @Html.LabelFor(model => model.Company):
+                @Model.Company
+            </div>
+            <div class="list-group-item-heading">
+                @Html.LabelFor(model => model.Price):
+                @String.Format("$ {0:F}", Model.Price)
+            </div>
+            <div class="list-group-item-heading">
+                @Html.LabelFor(model => model.Item):
+                @Model.Item
+            </div>
+            <div class="list-group-item-heading">
+                @Html.LabelFor(model => model.Availability):
+                @Model.Availability
+            </div>
+        </div>
+    </div>
+        @if (!User.IsInRole("admin"))
+        {
+            <span class="button">
+                @Html.ActionLink("Buy", "AddToCart", "ShoppingCart", new { id = Model.ProductId }, "")
+            </span>
+        }
+</div>
+

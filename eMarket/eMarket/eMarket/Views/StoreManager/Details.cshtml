@@ -1,0 +1,37 @@
+﻿@*@model eMarket.Models.Product
+@{
+    ViewBag.Title = "Details";
+}
+<div id="product-details">
+<h2>Details</h2>
+    <p id="details-img">
+     <img alt="@Model.Title" src="/Content/Images/@Model.Img" />
+    </p>
+<fieldset id="fieldset-details">
+    <legend>@Model.Title</legend>
+    <p>
+        <em>Category:</em>
+        @Model.Category.Name
+    </p>
+    <p>
+        <em>Company:</em>
+        @Model.Company
+    </p>
+    <p>
+        <em>Price:</em>
+        @String.Format("{0:F}",Model.Price)
+    </p>
+    <p>
+        <em>Item #:</em>
+        @Model.Item
+    </p>
+    <p>
+        <em>Availability:</em>
+        @Model.Availability
+    </p>
+</fieldset>
+<p id="details-back">
+    @Html.ActionLink("Edit", "Edit", new { id=Model.ProductId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+</div>*@

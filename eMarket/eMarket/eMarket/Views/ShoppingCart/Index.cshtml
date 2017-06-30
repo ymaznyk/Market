@@ -1,0 +1,64 @@
+﻿@model IEnumerable<eMarket.Models.Cart>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2>Index</h2>
+<table class="table table-bordered text-center">
+    <tr class="active text-center">
+        <th>
+            Title
+        </th>
+        <th>
+            Image
+        </th>
+        <th>
+            Price
+        </th>
+        <th>
+            Quantity
+        </th>
+        <th>
+            Date
+        </th>
+        <th></th>
+    </tr>
+@foreach (var cart in Model) {
+    <tr class="success">
+        <td>
+            @Html.DisplayFor(model => cart.Product.Title)
+        </td>
+        <td>
+            <img width="60" height="70" alt="@cart.Product.Title" src="/Content/Images/@cart.Product.Img"/>
+        </td>
+        <td>
+            @String.Format("$ {0:F}", cart.Product.Price)
+        </td>
+        <td>
+            @Html.DisplayFor(model => cart.Quantity)
+        </td>
+        <td>
+            @Html.DisplayFor(model => cart.DateCreated)
+        </td>
+        <td>
+           @Html.ActionLink("Details", "Details", "Home", new { id = cart.Product.ProductId }, null) | @Html.ActionLink("Delete", "Delete", new { id = cart.RecordId })
+        </td>
+    </tr>
+}
+    <tr>
+        <td>
+            Total
+        </td>
+        <td>
+        </td>
+        <td>
+        </td>
+        <td>
+        </td>
+        <td></td>
+        <td class="danger" id="cart-total">
+            @ViewBag.Total
+        </td>
+    </tr>
+</table>
+

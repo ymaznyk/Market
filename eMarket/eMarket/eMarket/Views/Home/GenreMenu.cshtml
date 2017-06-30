@@ -1,0 +1,9 @@
+﻿@model IEnumerable<eMarket.Models.Category>
+<ul class="nav nav-pills nav-stacked">
+    @foreach (var category in Model)
+    {
+        <li>@Html.ActionLink(category.Name, "Browse", new { Category = category.Name })
+        </li>
+
+    }
+</ul>

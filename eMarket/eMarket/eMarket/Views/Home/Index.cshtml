@@ -1,0 +1,33 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model IEnumerable<eMarket.Models.Category>
+@if (Request.IsAuthenticated && User.IsInRole("admin"))
+{
+        <div>
+            <span class="button off-width">@Html.ActionLink("Add new category", "Create", "CategoriesManager")</span>
+        </div>
+}
+    @foreach (var category in Model)
+    {
+        <div class="item">
+            <a href="@Url.Action("Browse", new { Category = category.Name })">
+                <img class="img-thumbnail" width="150" height="200" alt="@category.Name"
+                     src="/Content/Images/@category.Image" />
+                <p class="title">@category.Name</p>
+            </a>
+            @if (Request.IsAuthenticated && User.IsInRole("admin"))
+                {
+                <div>
+                    <span class="button button-center">
+                        @Html.ActionLink("Edit", "Edit", "CategoriesManager", new { id = category.CategoryId }, "")
+                    </span>
+                    <span class="button button-center">
+                        @Html.ActionLink("Delete", "Delete", "CategoriesManager", new { id = category.CategoryId }, "")
+                    </span>
+                </div>
+                }
+        </div>
+           
+    }

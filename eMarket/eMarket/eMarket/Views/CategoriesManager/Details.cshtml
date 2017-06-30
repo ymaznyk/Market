@@ -1,0 +1,14 @@
+﻿@*@model eMarket.Models.Category
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details @Model.Name</h2>
+    <p>
+     <img alt="@Model.Name" src="/Content/Images/@Model.Image" />
+    </p>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.CategoryId }) |
+    @Html.ActionLink("Back", "Index")
+</p>*@

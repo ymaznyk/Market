@@ -1,0 +1,19 @@
+﻿@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model eMarket.Models.Product
+
+<h2>Delete Confirmation</h2>
+<p>Are you sure you want to delete the product titled 
+   <strong>@Html.DisplayFor(model => model.Title)</strong>?
+</p>
+@using (Html.BeginForm()) {
+    <p>
+        <input type="submit" value="Delete" />
+    </p>
+}
+<div>
+    @Html.ActionLink("Back", null, null, null, new { href = Request.UrlReferrer })
+</div>
