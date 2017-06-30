@@ -1,0 +1,1 @@
+﻿select * from AspNetUserRoles full join AspNetUsers on AspNetUserRoles.UserId = AspNetUsers.Id
